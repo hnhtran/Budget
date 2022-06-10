@@ -1,6 +1,6 @@
-# Budget
+# Financial Bookeeping App
 
-## Premise: A Budget Management.
+## Premise: A Budget Management App.
 
 ## User Story
 As a user I want to
@@ -35,7 +35,7 @@ Express
 
 MongoDB
 
-## Wireframes (what game will look like): 
+## Wireframes: 
 ### First pic
 ### Secon pic
 ### Third pic
