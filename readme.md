@@ -16,7 +16,7 @@ As a user I want to
 * Being proactive for investment
 
 ## Future promotion:
-* Different models of budget planning
+* Using bank API to include real bank transactions
 
 * 
 
