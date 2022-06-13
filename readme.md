@@ -1,6 +1,6 @@
 # Financial Bookeeping App
 
-## Premise: A Budget Management App.
+## Premise: A Financial Bookeeping App.
 
 ## User Story
 As a user I want to
