@@ -7,14 +7,22 @@ const bankAccSchema = new Schema({
     required: true,
   },
   transactions: [
+    {transactionId: {
+        type: Number,
+        required: true
+    }},
+    {date: {
+        type: Date,
+        required: true
+    }},
     {
-      Source: {
+      source: {
         type: String,
         required: true,
       },
     },
     {
-      Amount: {
+      amount: {
         type: Number,
         required: true,
       },
