@@ -37,4 +37,4 @@ MongoDB
 
 ## Wireframes: 
 ### First pic
-![Start shot](https://github.com/hnhtran/Finance-Bookeeping-App/blob/main/project%202%20wireframe.png)
+![Start shot](https://github.com/hnhtran/Financial-Bookeeping-App/blob/main/assets/project%202%20wireframe.png)
