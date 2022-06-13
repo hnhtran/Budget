@@ -42,7 +42,8 @@ app.use(session({
 // app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
-    res.send('I will be the front index page later')
+    // res.send('I will be the front index page later')
+    res.render('index');
 })
 
 //=========================================
