@@ -4,18 +4,18 @@
 <div class="container">
     <h2 class="page-header">Edit Transaction</h2>
    <a href="/bankacc">Back to Bank Account</button></a>
-   <form action="/bankacc/{{transaction_.id}}?_method=PUT" method="post">
+   <form action="/bankacc/{{transaction._id}}?_method=PUT" method="post">
     <div class="mb-3">
         <label for="transDate">Date</label>
-        <input value="" type="date" class="form-control" id="transDate" name="transDate" placeholder="Enter transaction date">
+        <input value="06/06/2022" type="date" class="form-control" id="transDate" name="transDate" placeholder="Enter transaction date">
     </div>
     <div class="mb-3">
         <label for="transName">Description</label>
-        <input type="text" class="form-control" id="transName" name="transName" placeholder="Enter transaction description">
+        <input value="{{transaction.transName}}"type="text" class="form-control" id="transName" name="transName" placeholder="Enter transaction description">
     </div>
     <div class="mb-3">
         <label for="transAmount">Amount</label>
-        <input type="number" class="form-control" id="transAmount" name="transAmount" placeholder="Enter transaction amount">
+        <input value="{{transaction.transAmount}}" type="number" class="form-control" id="transAmount" name="transAmount" placeholder="Enter transaction amount">
     </div>
     <button type="submit" class="btn btn-outline-primary btn-md">Edit this transaction</button>
 </form>

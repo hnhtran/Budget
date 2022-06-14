@@ -1,5 +1,6 @@
 // import dependencies
 const mongoose = require("./connection");
+const user = require("./user");
 const { Schema, model } = mongoose;
 const bankAccSchema = new Schema({
   transDate: {
@@ -13,6 +14,10 @@ const bankAccSchema = new Schema({
   transAmount: {
     type: Number,
     required: true,
+  },
+  user: {
+    type: String,
+    ref: "user",
   }
 });
 

@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
     // res.render('bankacc/index')
     bankAcc.find({ user: req.session.email })
     .then((bankAcc) => {
+        console.log(bankAcc)
         // bankAcc.forEach((acc) => {
         //     toLocaleDateString(acc.transDate)
         //     // console.log(acc.transDate.toLocaleDateString())
@@ -30,6 +31,7 @@ router.get('/new', (req, res) => {
 router.post('/', (req, res) => {
     // res.send('post method for new transaction route')
     // res.json(req.body)
+    req.body.user = req.session.email
     bankAcc.create(req.body)
     .then((bankAcc) => {
         res.redirect('/bankacc')
@@ -42,20 +44,36 @@ router.post('/', (req, res) => {
 })
 
 // edit route
-// router.get('/:id/edit', (req, res) => {
-//     res.render('bankacc/edit')
-//     const id = req.params.id
-//     bankAcc.findById(id)
-//     .then((transaction) => {
-//         res.render('bankacc/edit', { transaction })
-//     })
-//     .catch((error) => {
-//         console.log(error)
-//         res.json({error})
-//     })
-// })
+router.get('/:id/edit', (req, res) => {
+    // res.render('bankacc/edit')
+    const id = req.params.id
+    bankAcc.findById(id)
+    .then((transaction) => {
+        console.log(transaction)
+        res.render('bankacc/edit', { transaction })
+    })
+    .catch((error) => {
+        console.log(error)
+        res.json({error})
+    })
+})
 
 // put method for edit route
+router.put("/:id", (req, res) => {
+    // get the id from params
+    const id = req.params.id
+    bankAcc.findByIdAndUpdate(id, req.body, { new: true })
+      .then((transaction) => {
+        // redirect to main page after updating
+        
+        res.redirect("/bankacc");
+      })
+      // send error as json
+      .catch((error) => {
+        console.log(error);
+        res.json({ error });
+      });
+  });
 
 // show route
 router.get('/:id', (req, res) => {
