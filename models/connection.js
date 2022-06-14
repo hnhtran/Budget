@@ -15,9 +15,9 @@ mongoose.connect(DATABASE_URL, CONFIG);
 
 // events for when the connection opens/closes/errors
 mongoose.connection
-.on(('open', () => console.log('Connected to mongoose'))
+.on('open', () => console.log('Connected to mongoose'))
+.on('close', () => console.log('Connection to mongoose closed'))
 .on('error', (err) => console.log(err))
-.on('close', () => console.log('Connection to mongoose closed')));
 
 // export the connection
 module.exports = mongoose;  

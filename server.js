@@ -6,9 +6,9 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const path = require('path');
-const bankAccRouter = require('./controllers/bankaccc');
-const notesRouter = require('./controllers/notes');
-const userRouter = require('./controllers/users');
+// const bankAccRouter = require('./controllers/bank-acc-routers');
+// const notesRouter = require('./controllers/notes-routers');
+const userRouter = require('./controllers/users-routers');
 const session = require('express-session');
 const Mogostore = require('connect-mongo')
 const rowdy = require('rowdy-logger');
@@ -39,10 +39,9 @@ app.use(session({
 //=========================================
 // app.use('/bankAcc', bankAccRouter);
 // app.use('/notes', notesRouter);
-// app.use('/user', userRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
-    // res.send('I will be the front index page later')
     res.render('index');
 })
 

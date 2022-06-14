@@ -2,7 +2,7 @@
 const mongoose = require("./connection");
 const { Schema, model } = mongoose;
 const userSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true,
         unique: true
@@ -10,9 +10,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    bankAccs: Number,
-    email: String
+    }
 });
 
 const user = model("user", userSchema);
