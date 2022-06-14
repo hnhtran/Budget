@@ -4,7 +4,16 @@
 <div class="container">
     <h2 class="page-header">Personalised Transactions Notes</h2>
    <a href="/bankacc"><button type="button" class="btn btn-primary btn-lg">Bank Account</button></a>
-   <a href="/user/logout"><button type="button" class="btn btn-primary btn-lg">Log out</button></a>
+   <a href="/user/logout"><button type="button" class="btn btn-danger btn-lg">Log out</button></a>
+   <div class="form-floating">
+    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+      <option selected>This will be each date</option>
+      <a href="/notes/{{id}}"></a>
+      <option value="1">This will be 1st trans</option>
+      <option value="2">This will be 2nd trans</option>
+    </select>
+    <label for="floatingSelect">Transactions</label>
+  </div>
 </div>
 
 {% endblock %}

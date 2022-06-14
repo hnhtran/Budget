@@ -18,9 +18,9 @@ As a user I want to
 ## Future promotion:
 * Using bank API to include real bank transactions
 
-* 
+* Search available
 
-* 
+* Linked accounts
 
 ## Technologies Used:
 HTML

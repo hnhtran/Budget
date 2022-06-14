@@ -2,9 +2,10 @@
 const mongoose = require("./connection");
 const { Schema, model } = mongoose;
 const noteSchema = new Schema({
-    title: String,
+    transTitle: String,
+    transDate: Date,
+    noteDate: Date,
     note: String,
-    transactionId: Number,
 });
 
 const note = model("note", noteSchema);

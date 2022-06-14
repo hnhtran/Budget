@@ -1,10 +1,59 @@
-{% layout 'layout.liquid' %} 
-{% block content %}
+{% layout 'layout.liquid' %} {% block content %}
 
 <div class="container">
-    <h2 class="page-header">Bank Account</h2>
-   <a href="/notes"><button type="button" class="btn btn-primary btn-lg">Notes</button></a>
-   <a href="/user/logout"><button type="button" class="btn btn-primary btn-lg">Log out</button></a>
+  <h2 class="page-header">Bank Account</h2>
+  <a href="/notes"
+    ><button type="button" class="btn btn-primary btn-md">Notes</button></a
+  >
+  <a href="/user/logout"
+    ><button type="button" class="btn btn-danger btn-md">Log out</button></a
+  >
+
+  <table class="table table-bordered border-primary table-striped">
+    <thead>
+        <tr>
+          <th scope="col" colspan="2">Date</th>
+          <th scope="col">Debit</th>
+          <th scope="col">Credit</th>
+          <th scope="col">Balance</th>
+        </tr>
+      </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">
+            <a href="">Larry the Bird</a>
+        </td>
+        <td>@mdo</td>
+        <td>omo</td>
+        <td>omo</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <a href="">Larry the Bird</a>
+        </td>
+        <td>@fat</td>
+        <td>omo</td>
+        <td>omo</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <a href="">Larry the Bird</a>
+        </td>
+        <td>@fat</td>
+        <td>omo</td>
+        <td>omo</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <a href="">Larry the Bird</a>
+        </td>
+        <td>@fat</td>
+        <td>omo</td>
+        <td>omo</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="/bankacc/new"><button  type="button" class="btn btn-warning btn-md">New Transaction</button></a>
 </div>
 
 {% endblock %}
