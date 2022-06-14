@@ -13,6 +13,8 @@ router.get('/signup', (req, res) => {
 
 // sign up post route
 router.post('/signup', async (req, res) => {
+    // console.log('sign up post route')
+    // res.send('sign up post route')
     // encrypt password
     req.body.password = await bcrypt.hash(
         req.body.password,
@@ -32,8 +34,8 @@ router.post('/signup', async (req, res) => {
 
 // The login Routes (Get => form, post => submi form)
 router.get('/login', (req, res) => {
-    res.send('I am login page')
-    // res.render('user/login')
+    // res.send('I am login page')
+    res.render('user/login')
 })
 
 module.exports = router
