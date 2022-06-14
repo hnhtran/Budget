@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const path = require('path');
 // const bankAccRouter = require('./controllers/bank-acc-routers');
-// const notesRouter = require('./controllers/notes-routers');
+const notesRouter = require('./controllers/notes-routers');
 const userRouter = require('./controllers/users-routers');
 const session = require('express-session');
 const Mogostore = require('connect-mongo')
@@ -38,7 +38,7 @@ app.use(session({
 // Routes
 //=========================================
 // app.use('/bankAcc', bankAccRouter);
-// app.use('/notes', notesRouter);
+app.use('/notes', notesRouter);
 app.use('/user', userRouter);
 
 app.get('/', (req, res) => {

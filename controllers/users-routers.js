@@ -57,7 +57,8 @@ router.post('/login', async (req, res) => {
                 // store some properties in the session object
                 req.session.email = email
                 req.session.loggedIn = true
-                res.send(`I will be redirect to bank account or notes page later`)
+                // res.send(`I will be redirect to bank account or notes page later`)
+                res.redirect('/notes')
             } else {
                 // error if password doesnt match
                 res.json({ error: 'password doesnt match' })
@@ -71,6 +72,19 @@ router.post('/login', async (req, res) => {
         // send error as json
         console.log(error)
         res.json({error})
+    })
+})
+
+// log out route
+router.get('/logout', (req, res) => {
+    // destroy session and redirect to main page
+    req.session.destroy((error) => {
+        if (error) {
+            console.log(error)
+            res.json({error})
+        } else {
+            res.redirect('/')
+        }
     })
 })
 
