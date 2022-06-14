@@ -19,65 +19,24 @@
         </tr>
       </thead>
     <tbody>
-      <tr>
-        <td colspan="2">
-            <a href="">Larry the Bird</a>
-        </td>
-        <td>@mdo</td>
-        <td>omo</td>
-        <td>omo</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-            <a href="">Larry the Bird</a>
-        </td>
-        <td>@fat</td>
-        <td>omo</td>
-        <td>omo</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-            <a href="">Larry the Bird</a>
-        </td>
-        <td>@fat</td>
-        <td>omo</td>
-        <td>omo</td>
-      </tr>
-      <tr>
-        <td colspan="2">
-            <a href="">Larry the Bird</a>
-        </td>
-        <td>@fat</td>
-        <td>omo</td>
-        <td>omo</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="table table-bordered border-primary table-striped">
-    <thead>
-        <tr>
-          <th scope="col" colspan="2">Date</th>
-          <th scope="col">Debit</th>
-          <th scope="col">Credit</th>
-          <th scope="col">Balance</th>
-        </tr>
-      </thead>
-    <tbody>
   {% for transaction in bankAcc %}
       <tr>
         <td colspan="2">
             <a href="/bankacc/{{ transaction.id }}">{{transaction.transDate | date: "%a %b %d %y"}}</a>
+            
         </td>
-        {% if transaction.transAmount > 0 %}
+        {% if transaction.transAmmount > 0 %}
+        <td>{{transaction.transAmount}}</td>
+        <td></td>
+        {% else %}
+        <td></td>
+        <td>{{transaction.transAmount}}</td>
         {% endif %}
-        
-        <td>{{transaction.transDate}}</td>
-        <td>{{transaction.transDate}}</td>
+        <td></td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
-  {% endfor %}
 
   <a href="/bankacc/new"><button  type="button" class="btn btn-warning btn-md">New Transaction</button></a>
 </div>

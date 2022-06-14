@@ -41,4 +41,53 @@ router.post('/', (req, res) => {
     })
 })
 
+// edit route
+// router.get('/:id/edit', (req, res) => {
+//     res.render('bankacc/edit')
+//     const id = req.params.id
+//     bankAcc.findById(id)
+//     .then((transaction) => {
+//         res.render('bankacc/edit', { transaction })
+//     })
+//     .catch((error) => {
+//         console.log(error)
+//         res.json({error})
+//     })
+// })
+
+// put method for edit route
+
+// show route
+router.get('/:id', (req, res) => {
+    // res.send('show route')
+    const id = req.params.id
+    // const transDate = req.body.transDate
+    bankAcc.findById(id)
+    .then((transaction) => {
+        res.render('bankacc/show', { transaction })
+        // console.log(transaction)
+    })
+    .catch((error) => {
+        console.log(error)
+        res.json({error})
+    })
+})
+
+// delete route
+router.delete("/:id", (req, res) => {
+    // get the id from params
+    const id = req.params.id;
+    // delete the fruit
+    bankAcc.findByIdAndRemove(id)
+      .then((transaction) => {
+        // redirect to main page after deleting
+        res.redirect("/bankacc");
+      })
+      // send error as json
+      .catch((error) => {
+        console.log(error);
+        res.json({ error });
+      });
+  });
+
 module.exports = router
