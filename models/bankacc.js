@@ -2,12 +2,12 @@
 const mongoose = require("./connection");
 const { Schema, model } = mongoose;
 const bankAccSchema = new Schema({
-  transName:{
-    type: String,
-    required: true,
-  },
   transDate: {
     type: Date,
+    required: true,
+  },
+  transName:{
+    type: String,
     required: true,
   },
   transAmount: {
