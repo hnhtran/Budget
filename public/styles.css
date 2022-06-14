@@ -4,3 +4,12 @@
   margin-top: 20px;
   font-family: 'nothing-you-could-do', sans-serif;
 }
+
+#login {
+    color: #801515;
+}
+
+#signup {
+    color: blanchedalmond;
+    background-color: rgb(15, 15, 15);
+}

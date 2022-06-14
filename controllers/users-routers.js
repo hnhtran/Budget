@@ -38,4 +38,40 @@ router.get('/login', (req, res) => {
     res.render('user/login')
 })
 
+// login post route
+router.post('/login', async (req, res) => {
+    // res.send('login post route')
+    // // get the data from the request body, then search for user
+    const { email, password } = req.body
+    // res.json({email, password})
+    user.findOne({user: email})
+    .then(async (user) => {
+        // check if email exists
+        if (user) {
+            // res.redirect('/')
+            // console.log(user)
+            // compare password
+            const result = await bcrypt.compare(password, user.password)
+            console.log(result)
+            if (result) {
+                // store some properties in the session object
+                req.session.email = email
+                req.session.loggedIn = true
+                res.send(`I will be redirect to bank account or notes page later`)
+            } else {
+                // error if password doesnt match
+                res.json({ error: 'password doesnt match' })
+            }
+        } else {
+            // send error if user doesnt exist
+            res.json({ error: "email isn't registered"})
+        }
+    })
+    .catch ((error) => {
+        // send error as json
+        console.log(error)
+        res.json({error})
+    })
+})
+
 module.exports = router
