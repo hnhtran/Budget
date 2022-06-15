@@ -8,12 +8,12 @@ router.get('/', (req, res) => {
     // res.render('bankacc/index')
     bankAcc.find({ user: req.session.email })
     .then((bankAcc) => {
-        console.log(bankAcc)
+        // console.log(bankAcc)
         // bankAcc.forEach((acc) => {
         //     toLocaleDateString(acc.transDate)
         //     // console.log(acc.transDate.toLocaleDateString())
         // })
-            console.log(bankAcc.transDate)
+            // console.log(bankAcc.transDate)
         res.render('bankacc/index', { bankAcc })
     })
     .catch((error) => {
@@ -49,7 +49,8 @@ router.get('/:id/edit', (req, res) => {
     const id = req.params.id
     bankAcc.findById(id)
     .then((transaction) => {
-        console.log(transaction)
+        console.log(transaction.transDate)
+        // console.log(req.body)
         res.render('bankacc/edit', { transaction })
     })
     .catch((error) => {
@@ -62,10 +63,13 @@ router.get('/:id/edit', (req, res) => {
 router.put("/:id", (req, res) => {
     // get the id from params
     const id = req.params.id
-    bankAcc.findByIdAndUpdate(id, req.body, { new: true })
+    // if transDate changed, update all the fields, otherwise, update transName and transAmount only
+    if (req.body.transDate) {
+        bankAcc.findByIdAndUpdate(id, req.body, { new: true })
       .then((transaction) => {
         // redirect to main page after updating
-        
+        console.log(req.body.transDate)
+        console.log(transaction)
         res.redirect("/bankacc");
       })
       // send error as json
@@ -73,6 +77,20 @@ router.put("/:id", (req, res) => {
         console.log(error);
         res.json({ error });
       });
+    } else {
+    bankAcc.findByIdAndUpdate(id, {transName: req.body.transName, transAmount: req.body.transAmount}, { new: true })
+      .then((transaction) => {
+        // redirect to main page after updating
+        console.log(req.body.transDate)
+        console.log(transaction)
+        res.redirect("/bankacc");
+      })
+      // send error as json
+      .catch((error) => {
+        console.log(error);
+        res.json({ error });
+      });
+    }
   });
 
 // show route

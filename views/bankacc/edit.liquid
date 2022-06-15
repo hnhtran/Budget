@@ -6,8 +6,8 @@
    <a href="/bankacc">Back to Bank Account</button></a>
    <form action="/bankacc/{{transaction._id}}?_method=PUT" method="post">
     <div class="mb-3">
-        <label for="transDate">Date</label>
-        <input value="06/06/2022" type="date" class="form-control" id="transDate" name="transDate" placeholder="Enter transaction date">
+        <label for="transDate">Date change</label>
+        <input type="date" class="form-control" id="transDate" name="transDate" value="{{transaction.transDate}}">
     </div>
     <div class="mb-3">
         <label for="transName">Description</label>
