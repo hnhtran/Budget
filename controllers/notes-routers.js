@@ -7,13 +7,13 @@ notes.bankAcc= {};
 const router = express.Router();
 
 // authorization middleware
-router.use((req, res, next) => {
-  if (req.session.loggedIn) {
-    next();
-  } else {
-    res.redirect("/user/login");
-  }
-});
+// router.use((req, res, next) => {
+//   if (req.session.loggedIn) {
+//     next();
+//   } else {
+//     res.redirect("/user/login");
+//   }
+// });
 
 // notes index route
 router.get("/", (req, res) => {

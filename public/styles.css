@@ -14,7 +14,7 @@
     background-color: rgb(15, 15, 15);
 }
 
-table, #bankAccShow{
+table, #bankAccShow, textarea{
     margin-top: 20px;
 }
 

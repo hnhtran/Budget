@@ -5,13 +5,13 @@ const router = express.Router();
 // let balance = 0
 
 // authorization middleware
-router.use((req, res, next) => {
-    if(req.session.loggedIn) {
-        next()
-    } else{
-        res.redirect('/user/login')
-    }
-})
+// router.use((req, res, next) => {
+//     if(req.session.loggedIn) {
+//         next()
+//     } else{
+//         res.redirect('/user/login')
+//     }
+// })
 
 // index route
 router.get("/bankAcc", (req, res) => {
