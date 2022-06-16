@@ -39,12 +39,16 @@ router.get("/new/:bankId", (req, res) => {
   
 
   if(!notes.bankAcc._id){
-  bankAcc.find({})
+  bankAcc.findById(bankId)
   .then((result) => {
     notes.bankAcc = result
-    notes.noteDate = new Date()
-    console.log(notes.noteDate)
-    console.log(notes.bankAcc)
+    // notes.noteDate = new Date()
+    // notes.create(
+    //   {notes.noteDate : new Date()},
+    //   notes.bankAcc : result,
+    //   notes.user = req.session.email
+    // )
+    console.log(notes)
     res.render("notes/new");
   })
   .catch((error) => {
