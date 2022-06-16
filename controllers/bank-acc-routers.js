@@ -4,6 +4,15 @@ const bankAcc = require("../models/bankacc");
 const router = express.Router();
 // let balance = 0
 
+// authorization middleware
+router.use((req, res, next) => {
+    if(req.session.loggedIn) {
+        next()
+    } else{
+        res.redirect('/user/login')
+    }
+})
+
 // index route
 router.get("/", (req, res) => {
   // res.render('bankacc/index')
@@ -117,8 +126,8 @@ router.get("/", (req, res) => {
         var firstDate = new Date(x.transDate),
           SecondDate = new Date(y.transDate);
 
-        if (firstDate < SecondDate) return -1;
-        if (firstDate > SecondDate) return 1;
+        if (firstDate < SecondDate) return 1;
+        if (firstDate > SecondDate) return -1;
         return 0;
       });
     //   console.log(bankAcc)
@@ -214,18 +223,65 @@ router.put("/:id", (req, res) => {
 router.get("/:id", (req, res) => {
   // res.send('show route')
   const id = req.params.id;
-  // const transDate = req.body.transDate
-  bankAcc
-    .findById(id)
-    .then((transaction) => {
-      res.render("bankacc/show", { transaction });
-      // console.log(transaction)
+  let date
+  
+// //   bankAcc
+// //   .find({ user: req.session.email })
+// //   .then((bankAcc) => {
+
+  bankAcc.findById(id)
+  .then((transaction) => {
+    date = transaction.transDate
+    // console.log(date)
+    bankAcc
+    .find({ transDate: date })
+    .then((transactions) => {
+        // res.json(transaction)
+      res.render("bankacc/show", { transactions });
+      console.log(transactions)
     })
     .catch((error) => {
       console.log(error);
       res.json({ error });
     });
+  })
+  .catch((error) => {
+    console.log(error);
+    res.json({ error });
+    })
+    // .catch((error) => {
+    //     console.log(error);
+    //     res.json({ error });
+    //     })
+
+// //   bankAcc
+// //     .find({ transDate: date })
+// //     .then((transaction) => {
+// //       res.render("bankacc/show", { transaction });
+// //       // console.log(transaction)
+// //     })
+// //     .catch((error) => {
+// //       console.log(error);
+// //       res.json({ error });
+// //     });
 });
+
+// show route
+// router.get("/:id", (req, res) => {
+//     // res.send('show route')
+//     const id = req.params.id;
+//     // const transDate = req.body.transDate
+//     bankAcc
+//       .findById(id)
+//       .then((transaction) => {
+//         res.render("bankacc/show", { transaction });
+//         // console.log(transaction)
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//         res.json({ error });
+//       });
+//   });
 
 // delete route
 router.delete("/:id", (req, res) => {

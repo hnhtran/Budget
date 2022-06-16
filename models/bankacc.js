@@ -18,6 +18,7 @@ const bankAccSchema = new Schema({
   user: {
     type: String,
     ref: "user",
+    required: true
   }
 });
 

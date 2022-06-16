@@ -1,6 +1,6 @@
 {% layout 'layout.liquid' %} {% block content %}
 
-<div class="container">
+<div class="container-md position-relative">
   <h2 class="page-header">Bank Account</h2>
   <a href="/notes"
     ><button type="button" class="btn btn-primary btn-md">Notes</button></a
@@ -8,7 +8,13 @@
   <a href="/user/logout"
     ><button type="button" class="btn btn-danger btn-md">Log out</button></a
   >
-    <p>Reading instructions: New transaction is added at the end of the list, applied same principle for finding Balance</p>
+    <p>Reading instructions: New transaction is added at the top of the list, applied same principle for finding Balance</p>
+
+    <a href="/bankacc/new"
+    ><button type="button" class="btn btn-warning btn-md float-end">
+      New Transaction
+    </button></a
+  >
 
   <table class="table table-bordered border-primary table-striped">
     <thead>
@@ -35,7 +41,7 @@
         {% else %}
         <td colspan="2">
             <a href="/bankacc/{{ transaction.id }}">{{
-              transaction.transDate | date: "%a %b %d %y"
+              transaction.transDate | date: "%a %d %b %y"
             }}</a>
           </td>
           <td>${{ transaction.transAmount}}</td>
@@ -55,11 +61,7 @@
 <td>${{ transaction.transAmount | plus: 10000}}</td>
 {% endif %} -->
 
-<a href="/bankacc/new"
-    ><button type="button" class="btn btn-warning btn-md">
-      New Transaction
-    </button></a
-  >
+
 </div>
 
 {% endblock %}
