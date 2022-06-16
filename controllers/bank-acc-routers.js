@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 })
 
 // index route
-router.get("/", (req, res) => {
+router.get("/bankAcc", (req, res) => {
   // res.render('bankacc/index')
   bankAcc
     .find({ user: req.session.email })
@@ -120,7 +120,7 @@ router.get("/", (req, res) => {
         return 0;
       });
 
-      console.log(MyAppointments);
+    //   console.log(MyAppointments);
 
       bankAcc.sort(function (x, y) {
         var firstDate = new Date(x.transDate),
@@ -141,18 +141,19 @@ router.get("/", (req, res) => {
 });
 
 // new transaction route
-router.get("/new", (req, res) => {
+router.get("/bankAcc/new", (req, res) => {
   res.render("bankacc/new");
 });
 
 // post method for new transaction route
-router.post("/", (req, res) => {
+router.post("/bankAcc", (req, res) => {
   // res.send('post method for new transaction route')
   // res.json(req.body)
   req.body.user = req.session.email;
   bankAcc
     .create(req.body)
     .then((bankAcc) => {
+        // console.log(bankAcc)
       res.redirect("/bankacc");
     })
     .catch((error) => {
@@ -163,7 +164,7 @@ router.post("/", (req, res) => {
 });
 
 // edit route
-router.get("/:id/edit", (req, res) => {
+router.get("/bankAcc/:id/edit", (req, res) => {
   // res.render('bankacc/edit')
   const id = req.params.id;
   bankAcc
@@ -180,7 +181,7 @@ router.get("/:id/edit", (req, res) => {
 });
 
 // put method for edit route
-router.put("/:id", (req, res) => {
+router.put("/bankAcc/:id", (req, res) => {
   // get the id from params
   const id = req.params.id;
   // if transDate changed, update all the fields, otherwise, update transName and transAmount only
@@ -220,7 +221,7 @@ router.put("/:id", (req, res) => {
 });
 
 // show route
-router.get("/:id", (req, res) => {
+router.get("/bankAcc/:id", (req, res) => {
   // res.send('show route')
   const id = req.params.id;
   let date
@@ -238,7 +239,7 @@ router.get("/:id", (req, res) => {
     .then((transactions) => {
         // res.json(transaction)
       res.render("bankacc/show", { transactions });
-      console.log(transactions)
+    //   console.log(transactions)
     })
     .catch((error) => {
       console.log(error);
@@ -284,7 +285,7 @@ router.get("/:id", (req, res) => {
 //   });
 
 // delete route
-router.delete("/:id", (req, res) => {
+router.delete("/bankAcc/:id", (req, res) => {
   // get the id from params
   const id = req.params.id;
   // delete the fruit
@@ -292,7 +293,7 @@ router.delete("/:id", (req, res) => {
     .findByIdAndRemove(id)
     .then((transaction) => {
       // redirect to main page after deleting
-      res.redirect("/bankacc");
+        res.redirect("/bankacc")
     })
     // send error as json
     .catch((error) => {

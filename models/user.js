@@ -11,7 +11,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     }
-});
+}, {
+    timestamps: true
+}
+);
 
 const user = model("user", userSchema);
 module.exports = user;

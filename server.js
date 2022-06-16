@@ -37,7 +37,7 @@ app.use(session({
 //=========================================
 // Routes
 //=========================================
-app.use('/bankAcc', bankAccRouter);
+app.use('/', bankAccRouter);
 app.use('/notes', notesRouter);
 app.use('/user', userRouter);
 

@@ -20,7 +20,10 @@ const bankAccSchema = new Schema({
     ref: "user",
     required: true
   }
-});
+}, {
+  timestamps: true
+}
+);
 
 const bankAcc = model("bankAcc", bankAccSchema);
 module.exports = bankAcc;

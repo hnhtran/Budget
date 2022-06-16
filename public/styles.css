@@ -18,7 +18,7 @@ table, #bankAccShow{
     margin-top: 20px;
 }
 
-table, #bankAccShow, #showDate {
+table, #bankAccShow, #showDate, .form-floating {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -31,4 +31,8 @@ table, #bankAccShow, #showDate {
 
 .btn-warning {
     margin-bottom: 10px;
+}
+
+#notesBtn {
+    background-color: coral;
 }

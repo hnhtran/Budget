@@ -35,9 +35,9 @@
                     <li>Transaction Date: {{transaction.transDate | date: "%d %b %y"}}</li>
                     <li>Transaction Amount: {{transaction.transAmount}}</li>
                     <li>Transaction Description: {{transaction.transName}}</li>
-                  </ol>
 
                   <a href="/bankacc/{{ transaction._id }}/edit"><button class="btn btn-sm btn-info">Edit</button></a>
+                  <a href="/notes/new/{{ transaction._id }}"><button class="btn btn-sm btn-info" id="notesBtn">Notes</button></a>
 
                   <button
     type="button"
@@ -45,6 +45,7 @@
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
     >Delete</button>
+                  
                   
 
                 </div>
