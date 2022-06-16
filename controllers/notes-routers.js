@@ -2,6 +2,7 @@
 const express = require("express");
 const notes = require("../models/note");
 const bankAcc = require("../models/bankacc");
+notes.bankAcc= {};
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.get("/", (req, res) => {
   notes
     .find({ user: req.session.email })
     .then((notes) => {
-      console.log(notes);
+      // console.log(notes);
       res.render("notes/index");
     })
     .catch((error) => {
@@ -33,10 +34,28 @@ router.get("/new/:bankId", (req, res) => {
   // this is live in post method for create new note
   req.body.user = req.session.email
   const bankId = req.params.bankId;
-  console.log(bankId);
-  console.log(bankAcc)
+  // console.log(bankId);
+  // console.log(bankAcc)
   
-  res.render("notes/new");
+
+  if(!notes.bankAcc._id){
+  bankAcc.find({})
+  .then((result) => {
+    notes.bankAcc = result
+    notes.noteDate = new Date()
+    console.log(notes.noteDate)
+    console.log(notes.bankAcc)
+    res.render("notes/new");
+  })
+  .catch((error) => {
+    console.log(error)
+    res.json(error)
+  })}
+  else{
+    res.send('bankId already exists')
+    console.log(notes)
+  }
+  
 });
 
 module.exports = router;
