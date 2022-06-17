@@ -3,19 +3,9 @@ const express = require("express");
 const notes = require("../models/note");
 const bankAcc = require("../models/bankacc");
 const user = require("../models/user");
-// notes.bankAcc = {};
 let bankId = "";
 
 const router = express.Router();
-
-// authorization middleware
-// router.use((req, res, next) => {
-//   if (req.session.loggedIn) {
-//     next();
-//   } else {
-//     res.redirect("/user/login");
-//   }
-// });
 
 // notes index route
 router.get("/", (req, res) => {
@@ -50,7 +40,7 @@ router.get("/new/:bankId", (req, res) => {
   res.render("notes/new");
 });
 
-// show route
+// show route linked from bankacc
 router.get("/:noteId/edit/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
@@ -63,19 +53,7 @@ router.get("/:noteId/edit/:bankId", (req, res) => {
   });
 });
 
-// edit route
-// router.put("/:noteId/:bankId", (req, res) => {
-//   noteId = req.params.noteId;
-//   bankId = req.params.bankId;
-//   notes
-//     .findByIdAndUpdate(noteId, { note: req.body.note }, { new: true })
-//     .then((note) => {
-//       console.log(note);
-//       res.redirect(`/bankacc/${bankId}`);
-//     });
-// });
-
-// show route
+// show route linked from notes
 router.get("/:noteId/edit", (req, res) => {
   noteId = req.params.noteId;
   notes.findById(noteId).then((note) => {
@@ -98,9 +76,7 @@ router.put("/:noteId/:bankId", (req, res) => {
     });
 });
 
-
-
-// delete route
+// delete route from bankacc
 router.delete("/:noteId/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
@@ -113,7 +89,7 @@ router.delete("/:noteId/:bankId", (req, res) => {
   })
 });
 
-// delete route
+// delete route from notes
 router.delete("/:noteId", (req, res) => {
   noteId = req.params.noteId;
   notes.findByIdAndRemove(noteId).then((note) => {
@@ -192,4 +168,16 @@ module.exports = router;
 //     //   res.json(error)
 //     // })
 //   }
+// });
+
+// edit route
+// router.put("/:noteId/:bankId", (req, res) => {
+//   noteId = req.params.noteId;
+//   bankId = req.params.bankId;
+//   notes
+//     .findByIdAndUpdate(noteId, { note: req.body.note }, { new: true })
+//     .then((note) => {
+//       console.log(note);
+//       res.redirect(`/bankacc/${bankId}`);
+//     });
 // });

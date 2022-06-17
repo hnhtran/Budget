@@ -3,25 +3,15 @@ const express = require("express");
 const bankAcc = require("../models/bankacc");
 const router = express.Router();
 
-// authorization middleware
-// router.use((req, res, next) => {
-//     if(req.session.loggedIn) {
-//         next()
-//     } else{
-//         res.redirect('/user/login')
-//     }
-// })
-
 // index route
 router.get("/bankAcc", (req, res) => {
   bankAcc
     .find({ user: req.session.email })
     .then((bankAcc) => {
-      //=========================================
-      // i use this code to get the sorted date for index page
-      //=========================================
-      // source: https://www.delftstack.com/howto/javascript/sort-array-of-objects-by-singlekey-with-date-value/#:~:text=You%20can%20sort%20an%20array%20of%20objects%20by,will%20return%201%3B%20otherwise%2C%20it%20will%20return%200.
-      
+//=========================================
+// i use this code to get the sorted date for index page
+//=========================================
+// source: https://www.delftstack.com/howto/javascript/sort-array-of-objects-by-singlekey-with-date-value/#:~:text=You%20can%20sort%20an%20array%20of%20objects%20by,will%20return%201%3B%20otherwise%2C%20it%20will%20return%200.  
 
       bankAcc.sort(function (x, y) {
         var firstDate = new Date(x.transDate),
@@ -47,17 +37,13 @@ router.get("/bankAcc/new", (req, res) => {
 
 // post method for new transaction route
 router.post("/bankAcc", (req, res) => {
-  // res.send('post method for new transaction route')
-  // res.json(req.body)
   req.body.user = req.session.email;
   bankAcc
     .create(req.body)
     .then((bankAcc) => {
-        // console.log(bankAcc)
       res.redirect("/bankacc");
     })
     .catch((error) => {
-      // send error as json
       console.log(error);
       res.json({ error });
     });
@@ -65,13 +51,11 @@ router.post("/bankAcc", (req, res) => {
 
 // edit route
 router.get("/bankAcc/:id/edit", (req, res) => {
-  // res.render('bankacc/edit')
   const id = req.params.id;
   bankAcc
     .findById(id)
     .then((transaction) => {
       console.log(transaction.transDate);
-      // console.log(req.body)
       res.render("bankacc/edit", { transaction });
     })
     .catch((error) => {
@@ -108,8 +92,6 @@ router.put("/bankAcc/:id", (req, res) => {
       )
       .then((transaction) => {
         // redirect to main page after updating
-        // console.log(req.body.transDate)
-        // console.log(transaction)
         res.redirect("/bankacc");
       })
       // send error as json
@@ -122,28 +104,20 @@ router.put("/bankAcc/:id", (req, res) => {
 
 // show route
 router.get("/bankAcc/:id", (req, res) => {
-  // res.send('show route')
   const id = req.params.id;
   let date
-  
-// //   bankAcc
-// //   .find({ user: req.session.email })
-// //   .then((bankAcc) => {
 
   bankAcc.findById(id)
   .then((transaction) => {
     date = transaction.transDate
-    // console.log(date)
     bankAcc
     .find({ transDate: date })
     .then((transactions) => {
-        // res.json(transaction)
-        console.log(transaction.notes)
+        // console.log(transaction.notes)
       res.render("bankacc/show", { 
         transactions : transactions, 
         notes : transaction.notes 
       });
-    //   console.log(transactions)
     })
     .catch((error) => {
       console.log(error);
@@ -154,39 +128,7 @@ router.get("/bankAcc/:id", (req, res) => {
     console.log(error);
     res.json({ error });
     })
-    // .catch((error) => {
-    //     console.log(error);
-    //     res.json({ error });
-    //     })
-
-// //   bankAcc
-// //     .find({ transDate: date })
-// //     .then((transaction) => {
-// //       res.render("bankacc/show", { transaction });
-// //       // console.log(transaction)
-// //     })
-// //     .catch((error) => {
-// //       console.log(error);
-// //       res.json({ error });
-// //     });
 });
-
-// show route
-// router.get("/:id", (req, res) => {
-//     // res.send('show route')
-//     const id = req.params.id;
-//     // const transDate = req.body.transDate
-//     bankAcc
-//       .findById(id)
-//       .then((transaction) => {
-//         res.render("bankacc/show", { transaction });
-//         // console.log(transaction)
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//         res.json({ error });
-//       });
-//   });
 
 // delete route
 router.delete("/bankAcc/:id", (req, res) => {
@@ -212,19 +154,19 @@ module.exports = router;
 // Code Graveyard
 //=========================================
 // code got from this source https://stackoverflow.com/questions/53212020/get-list-of-duplicate-objects-in-an-array-of-objects
-const values = [
-  { id: 10, name: "someName4" },
-  { id: 10, name: "someName2" },
-  { id: 11, name: "someName2" },
-  { id: 10, name: "someName4" },
-  { id: 12, name: "someName4" },
-];
+// const values = [
+//   { id: 10, name: "someName4" },
+//   { id: 10, name: "someName2" },
+//   { id: 11, name: "someName2" },
+//   { id: 10, name: "someName4" },
+//   { id: 12, name: "someName4" },
+// ];
 
-const lookup = values.reduce((a, e) => {
-  a[e.name] = ++a[e.name] || 0;
-  return a;
-}, {});
-const filterA = values.filter((e) => lookup[e.name]);
+// const lookup = values.reduce((a, e) => {
+//   a[e.name] = ++a[e.name] || 0;
+//   return a;
+// }, {});
+// const filterA = values.filter((e) => lookup[e.name]);
 //   console.log(values)
 //   console.log(filterA)
 
@@ -298,3 +240,40 @@ const filterA = values.filter((e) => lookup[e.name]);
 // });
 
 // //   console.log(MyAppointments);
+
+// authorization middleware
+// router.use((req, res, next) => {
+//     if(req.session.loggedIn) {
+//         next()
+//     } else{
+//         res.redirect('/user/login')
+//     }
+// })
+
+// //   bankAcc
+// //     .find({ transDate: date })
+// //     .then((transaction) => {
+// //       res.render("bankacc/show", { transaction });
+// //       // console.log(transaction)
+// //     })
+// //     .catch((error) => {
+// //       console.log(error);
+// //       res.json({ error });
+// //     });
+
+// show route
+// router.get("/:id", (req, res) => {
+//     // res.send('show route')
+//     const id = req.params.id;
+//     // const transDate = req.body.transDate
+//     bankAcc
+//       .findById(id)
+//       .then((transaction) => {
+//         res.render("bankacc/show", { transaction });
+//         // console.log(transaction)
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//         res.json({ error });
+//       });
+//   });
