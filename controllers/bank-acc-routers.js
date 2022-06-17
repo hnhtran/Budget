@@ -241,7 +241,7 @@ module.exports = router;
 
 // //   console.log(MyAppointments);
 
-// authorization middleware
+// authorization midleware
 // router.use((req, res, next) => {
 //     if(req.session.loggedIn) {
 //         next()
