@@ -2,19 +2,14 @@
 
 <div class="container-md position-relative">
   <h2 class="page-header">Bank Account</h2>
-  <a href="/notes"
-    ><button type="button" class="btn btn-primary btn-md">Notes</button></a
-  >
-  <a href="/user/logout"
-    ><button type="button" class="btn btn-danger btn-md">Log out</button></a
-  >
-    <p>Reading instructions: New transaction is added at the top of the list, applied same principle for finding Balance</p>
+  <a href="/notes"><button type="button" class="btn btn-primary btn-md">Notes</button></a>
+  <a href="/user/logout"><button type="button" class="btn btn-danger btn-md">Log out</button></a>
+  <p>Reading instructions: New transaction is added at the top of the list, applied same principle for finding Balance
+  </p>
 
-    <a href="/bankacc/new"
-    ><button type="button" class="btn btn-warning btn-md float-end">
+  <a href="/bankacc/new"><button type="button" class="btn btn-warning btn-md float-end">
       New Transaction
-    </button></a
-  >
+    </button></a>
 
   <table class="table table-bordered border-primary table-striped">
     <thead>
@@ -26,42 +21,35 @@
       </tr>
     </thead>
     <tbody>
-        {% assign balance = 0 %}
+      {% assign balance = 0 %}
       {% for transaction in bankAcc %}
       <tr>
         {% if transaction.transAmount >= 0 %}
         <td colspan="2">
           <a href="/bankacc/{{ transaction.id }}">{{
-            transaction.transDate | date: "%a %b %d %y"
-          }}</a>
+            transaction.transDate | date: "%a %d %b %y"
+            }}</a>
         </td>
         <td></td>
         <td>${{ transaction.transAmount}}</td>
         <!-- <td></td> -->
         {% else %}
         <td colspan="2">
-            <a href="/bankacc/{{ transaction.id }}">{{
-              transaction.transDate | date: "%a %d %b %y"
+          <a href="/bankacc/{{ transaction.id }}">{{
+            transaction.transDate | date: "%a %d %b %y"
             }}</a>
-          </td>
-          <td>${{ transaction.transAmount}}</td>
-          <td></td>
-          <!-- <td></td> -->
+        </td>
+        <td>${{ transaction.transAmount}}</td>
+        <td></td>
+        <!-- <td></td> -->
         {% endif %}
         <td>
-            {% assign balance = balance | plus: transaction.transAmount %}
-            ${{ balance }}
+          {% assign balance = balance | plus: transaction.transAmount %}
+          ${{ balance }}
         </td>
-    </tr>{% endfor %}
-</tbody>
-</table>
-<!-- {% if transaction.transAmount >= 0 %}
-<td>${{ transaction.transAmount | minus: 10000}}</td>
-{% else %}
-<td>${{ transaction.transAmount | plus: 10000}}</td>
-{% endif %} -->
-
-
+      </tr>{% endfor %}
+    </tbody>
+  </table>
 </div>
 
 {% endblock %}

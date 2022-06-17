@@ -138,7 +138,7 @@ router.get("/bankAcc/:id", (req, res) => {
     .find({ transDate: date })
     .then((transactions) => {
         // res.json(transaction)
-      res.render("bankacc/show", { transactions });
+      res.render("bankacc/show", { transactions : transactions, notes : transaction.notes });
     //   console.log(transactions)
     })
     .catch((error) => {

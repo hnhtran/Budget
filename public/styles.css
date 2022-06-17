@@ -18,7 +18,7 @@ table, #bankAccShow, textarea{
     margin-top: 20px;
 }
 
-table, #bankAccShow, #showDate, .form-floating {
+table, #bankAccShow, #showDate, .form-floating, #textIndex {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -29,10 +29,20 @@ table, #bankAccShow, #showDate, .form-floating {
     background-color: black;
 }
 
+.transDatePositive {
+    text-align: center;
+    color: black;
+    background-color: tomato;
+}
+
 .btn-warning {
     margin-bottom: 10px;
 }
 
 #notesBtn {
     background-color: coral;
+}
+
+#textIndex {
+    background-color: #cb9898;
 }

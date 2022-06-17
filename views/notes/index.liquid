@@ -5,15 +5,18 @@
     <h2 class="page-header">Personalised Transactions Notes</h2>
    <a href="/bankacc"><button type="button" class="btn btn-primary btn-md">Bank Account</button></a>
    <a href="/user/logout"><button type="button" class="btn btn-danger btn-md">Log out</button></a>
-   <div class="form-floating">
-    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-      <option selected>Please choose the notes</option>
-      <a href="/notes/{{id}}"></a>
-      <option value="1">This will be 1st trans</option>
-      <option value="2">This will be 2nd trans</option>
-    </select>
-    <label for="floatingSelect">Transactions</label>
-  </div>
+   <table class="table table-bordered border-primary table-striped">
+    <thead>
+      <tr>
+        <th scope="col" colspan="2">Date</th>
+        <th scope="col">Debit</th>
+        <th scope="col">Credit</th>
+        <th scope="col">Balance</th>
+      </tr>
+    </thead>
+      <tbody>
+
+      </tbody>
 </div>
 
 {% endblock %}
