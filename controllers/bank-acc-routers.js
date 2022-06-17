@@ -31,7 +31,7 @@ router.get("/bankAcc", (req, res) => {
         if (firstDate > SecondDate) return 1;
         return 0;
       });
-
+      console.log(bankAcc);
       res.render("bankacc/index", { bankAcc });
     })
     .catch((error) => {
@@ -138,7 +138,11 @@ router.get("/bankAcc/:id", (req, res) => {
     .find({ transDate: date })
     .then((transactions) => {
         // res.json(transaction)
-      res.render("bankacc/show", { transactions : transactions, notes : transaction.notes });
+        console.log(transaction.notes)
+      res.render("bankacc/show", { 
+        transactions : transactions, 
+        notes : transaction.notes 
+      });
     //   console.log(transactions)
     })
     .catch((error) => {

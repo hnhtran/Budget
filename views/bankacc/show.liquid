@@ -70,15 +70,14 @@
 
           
           {% for note in notes %}
-
-          <li value="{{forloop.index0}}">
-            {% for transaction in transactions %}
-              
+{% for transaction in transactions %}
+          <li >
             <a class="dropdown-item" href="/notes/{{ note._id }}/edit/{{transaction._id}}">{{note.note}}</a>
-            {% endfor %}
+            
           </li>
 
           
+          {% endfor %}
           {% endfor %}
         </ul>
       </div>

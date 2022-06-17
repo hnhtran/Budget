@@ -3,7 +3,7 @@ const express = require("express");
 const notes = require("../models/note");
 const bankAcc = require("../models/bankacc");
 const user = require("../models/user");
-notes.bankAcc = {};
+// notes.bankAcc = {};
 let bankId = "";
 
 const router = express.Router();
@@ -19,32 +19,29 @@ const router = express.Router();
 
 // notes index route
 router.get("/", (req, res) => {
-  bankAcc.find({ user: req.session.email })
-    .then((bankAcc) => {
-  notes.find({})
+  notes
+    .find({ user: req.session.email })
     .then((notes) => {
-      console.log(notes);
       res.render("notes/index", { notes });
     })
     .catch((error) => {
       console.log(error);
       res.json({ error });
-    })
-  })
 });
+})
 
 // create route
 router.post("/", (req, res) => {
+  req.body.user = req.session.email;
   req.body.noteDate = new Date();
-  notes.create(req.body)
-    .then((note) => {
-  bankAcc.findById(bankId)
-  .then((bankAcc) => {
-    bankAcc.notes.push(note);
-    bankAcc.save();
-    console.log(bankAcc);
-    res.redirect(`/bankacc/${bankId}`);
-  })})
+  notes.create(req.body).then((note) => {
+    bankAcc.findById(bankId).then((bankAcc) => {
+      bankAcc.notes.push(note);
+      bankAcc.save();
+      console.log(bankAcc);
+      res.redirect(`/bankacc/${bankId}`);
+    });
+  });
 });
 
 // new notes route
@@ -57,47 +54,54 @@ router.get("/new/:bankId", (req, res) => {
 router.get("/:noteId/edit/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
-  bankAcc.findById(bankId)
-  .then((transaction) => {
-    notes.findById(noteId)
-    .then((note) => {
+  bankAcc.findById(bankId).then((transaction) => {
+    notes.findById(noteId).then((note) => {
       // console.log(bankAcc);
       // res.json(note);
       res.render("notes/edit", { note, transaction });
-    })
-  })
-})
+    });
+  });
+});
 
 // edit route
 router.put("/:noteId/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
-  notes.findByIdAndUpdate(noteId, {note: req.body.note}, { new: true })
-  .then((note) => {
-    console.log(note)
-    res.redirect(`/bankacc/${bankId}`);
-  })
-})
+  notes
+    .findByIdAndUpdate(noteId, { note: req.body.note }, { new: true })
+    .then((note) => {
+      console.log(note);
+      res.redirect(`/bankacc/${bankId}`);
+    });
+});
 
 // delete route
 router.delete("/:noteId/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
-  notes.findByIdAndRemove(noteId)
-  .then((note) => {
+  notes.findByIdAndRemove(noteId).then((note) => {
     res.redirect(`/bankacc/${bankId}`);
   })
-})
-
-
-
+  .catch((error) => {
+    console.log(error);
+    res.json({ error });
+  })
+});
 
 module.exports = router;
-
 
 //=========================================
 // Code Graveyard
 //=========================================
+// delete route
+// router.delete("/:noteId", (req, res) => {
+//   noteId = req.params.noteId;
+//   // bankId = req.params.bankId;
+//   notes.deleteMany({}).then((note) => {
+//     // res.redirect(`/bankacc/${bankId}`);
+//     res.send("deleted");
+//   });
+// });
 // router.get("/new/:bankId", (req, res) => {
 //   // this is live in post method for create new note
 //   req.body.user = req.session.email;

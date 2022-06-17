@@ -44,12 +44,16 @@ router.post('/login', async (req, res) => {
     // // get the data from the request body, then search for user
     const { email, password } = req.body
     // res.json({email, password})
-    user.findOne({user: email})
+    user.find({})
+    .then((users) => {
+        console.log(users)
+    })
+    user.findOne({email: email})
     .then(async (user) => {
         // check if email exists
         if (user) {
+            console.log(user)
             // res.redirect('/')
-            // console.log(user)
             // compare password
             const result = await bcrypt.compare(password, user.password)
             console.log(result)
