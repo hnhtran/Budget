@@ -28,7 +28,7 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(session({
-    // secret: process.env.SECRET,
+    secret: process.env.SECRET,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     saveUninitialized: true,
     resave: false
