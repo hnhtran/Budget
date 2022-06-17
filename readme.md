@@ -1,7 +1,6 @@
 # Financial Bookeeping App
 
-## Premise: A Financial Bookeeping App 
-![](https://financial-bookeeping-app.herokuapp.com/)
+## ![Premise: A Financial Bookeeping App](https://financial-bookeeping-app.herokuapp.com/)
 
 ## User Story
 As a user I want to
