@@ -4,7 +4,7 @@
   <h2 class="page-header">Bank Account</h2>
   <a href="/notes"><button type="button" class="btn btn-primary btn-md">Notes</button></a>
   <a href="/user/logout"><button type="button" class="btn btn-danger btn-md">Log out</button></a>
-  <p>Reading instructions: New transaction is added at the top of the list, applied same principle for finding Balance
+  <p>Reading instructions: New transaction is added at the bottom of the list, applied same principle for finding Balance
   </p>
 
   <a href="/bankacc/new"><button type="button" class="btn btn-warning btn-md float-end">
@@ -41,7 +41,6 @@
         </td>
         <td>${{ transaction.transAmount}}</td>
         <td></td>
-        <!-- <td></td> -->
         {% endif %}
         <td>
           {% assign balance = balance | plus: transaction.transAmount %}

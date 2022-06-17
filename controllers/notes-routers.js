@@ -2,24 +2,26 @@
 const express = require("express");
 const notes = require("../models/note");
 const bankAcc = require("../models/bankacc");
+const user = require("../models/user");
 notes.bankAcc = {};
 let bankId = "";
 
 const router = express.Router();
 
 // authorization middleware
-router.use((req, res, next) => {
-  if (req.session.loggedIn) {
-    next();
-  } else {
-    res.redirect("/user/login");
-  }
-});
+// router.use((req, res, next) => {
+//   if (req.session.loggedIn) {
+//     next();
+//   } else {
+//     res.redirect("/user/login");
+//   }
+// });
 
 // notes index route
 router.get("/", (req, res) => {
-  notes
-    .find({ user: req.session.email })
+  bankAcc.find({ user: req.session.email })
+    .then((bankAcc) => {
+  notes.find({})
     .then((notes) => {
       console.log(notes);
       res.render("notes/index", { notes });
@@ -27,54 +29,75 @@ router.get("/", (req, res) => {
     .catch((error) => {
       console.log(error);
       res.json({ error });
-    });
+    })
+  })
 });
 
 // create route
 router.post("/", (req, res) => {
   req.body.noteDate = new Date();
+  notes.create(req.body)
+    .then((note) => {
   bankAcc.findById(bankId)
   .then((bankAcc) => {
-    bankAcc.notes.push(req.body);
+    bankAcc.notes.push(note);
     bankAcc.save();
     console.log(bankAcc);
     res.redirect(`/bankacc/${bankId}`);
-  })
-  // bankAcc
-  //   .findById(bankId)
-  //   .then((bankAcc) => {
-  //     req.body.noteDate = new Date();
-  //     req.body.bankAcc = bankAcc;
-  //     // console.log(req.body);
-  //     notes.create(req.body)
-  //       .then((notes) => {
-  //         // res.render("notes/index", { notes });
-  //         // res.redirect("/notes");
-  //         // res.json(notes);
-  //         notes.save()
-  //           .then((result) => {
-  //             console.log(result)
-  //             res.redirect('/notes');
-  //           })
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         res.json({ error });
-  //       });
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     res.json({ error });
-  //   });
+  })})
 });
 
 // new notes route
 router.get("/new/:bankId", (req, res) => {
   bankId = req.params.bankId;
-  // console.log(bankId);
   res.render("notes/new");
 });
 
+// show route
+router.get("/:noteId/edit/:bankId", (req, res) => {
+  noteId = req.params.noteId;
+  bankId = req.params.bankId;
+  bankAcc.findById(bankId)
+  .then((transaction) => {
+    notes.findById(noteId)
+    .then((note) => {
+      // console.log(bankAcc);
+      // res.json(note);
+      res.render("notes/edit", { note, transaction });
+    })
+  })
+})
+
+// edit route
+router.put("/:noteId/:bankId", (req, res) => {
+  noteId = req.params.noteId;
+  bankId = req.params.bankId;
+  notes.findByIdAndUpdate(noteId, {note: req.body.note}, { new: true })
+  .then((note) => {
+    console.log(note)
+    res.redirect(`/bankacc/${bankId}`);
+  })
+})
+
+// delete route
+router.delete("/:noteId/:bankId", (req, res) => {
+  noteId = req.params.noteId;
+  bankId = req.params.bankId;
+  notes.findByIdAndRemove(noteId)
+  .then((note) => {
+    res.redirect(`/bankacc/${bankId}`);
+  })
+})
+
+
+
+
+module.exports = router;
+
+
+//=========================================
+// Code Graveyard
+//=========================================
 // router.get("/new/:bankId", (req, res) => {
 //   // this is live in post method for create new note
 //   req.body.user = req.session.email;
@@ -129,5 +152,3 @@ router.get("/new/:bankId", (req, res) => {
 //     // })
 //   }
 // });
-
-module.exports = router;

@@ -18,7 +18,7 @@ table, #bankAccShow, textarea{
     margin-top: 20px;
 }
 
-table, #bankAccShow, #showDate, .form-floating, #textIndex {
+table, #bankAccShow, #showDate, .form-floating, #textIndex, .dropdown {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -45,4 +45,15 @@ table, #bankAccShow, #showDate, .form-floating, #textIndex {
 
 #textIndex {
     background-color: #cb9898;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: mistyrose;
+    background-color: black;
+}
+
+#cardNote {
+    margin: 0 auto;
 }

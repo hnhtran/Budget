@@ -27,8 +27,8 @@ router.get("/bankAcc", (req, res) => {
         var firstDate = new Date(x.transDate),
           SecondDate = new Date(y.transDate);
 
-        if (firstDate < SecondDate) return 1;
-        if (firstDate > SecondDate) return -1;
+        if (firstDate < SecondDate) return -1;
+        if (firstDate > SecondDate) return 1;
         return 0;
       });
 
