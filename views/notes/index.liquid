@@ -15,8 +15,14 @@
       <tbody>
         {% for note in notes %}
 <tr>
-  <td>{{note.noteDate | date: "%a %d %b %y"}}</td>
-  <td>{{note.note}}</td>
+  
+  <td>
+    {{note.noteDate | date: "%a %d %b %y"}}
+  </td>
+  <td>
+    <a href="notes/{{note._id}}/edit">{{note.note}}</a>
+    
+  </td>
 
 </tr>
         {% endfor %}

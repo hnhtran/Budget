@@ -64,6 +64,29 @@ router.get("/:noteId/edit/:bankId", (req, res) => {
 });
 
 // edit route
+// router.put("/:noteId/:bankId", (req, res) => {
+//   noteId = req.params.noteId;
+//   bankId = req.params.bankId;
+//   notes
+//     .findByIdAndUpdate(noteId, { note: req.body.note }, { new: true })
+//     .then((note) => {
+//       console.log(note);
+//       res.redirect(`/bankacc/${bankId}`);
+//     });
+// });
+
+// show route
+router.get("/:noteId/edit", (req, res) => {
+  noteId = req.params.noteId;
+  notes.findById(noteId).then((note) => {
+  bankAcc.findOne({note}).then((transaction) => {
+      // console.log(bankAcc);
+      // res.json(note);
+      res.render("notes/edit", { note, transaction });
+    });
+  });
+});
+// edit route
 router.put("/:noteId/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
@@ -71,16 +94,30 @@ router.put("/:noteId/:bankId", (req, res) => {
     .findByIdAndUpdate(noteId, { note: req.body.note }, { new: true })
     .then((note) => {
       console.log(note);
-      res.redirect(`/bankacc/${bankId}`);
+      res.redirect(`/notes`);
     });
 });
+
+
 
 // delete route
 router.delete("/:noteId/:bankId", (req, res) => {
   noteId = req.params.noteId;
   bankId = req.params.bankId;
   notes.findByIdAndRemove(noteId).then((note) => {
-    res.redirect(`/bankacc/${bankId}`);
+    res.redirect(`/notes`);
+  })
+  .catch((error) => {
+    console.log(error);
+    res.json({ error });
+  })
+});
+
+// delete route
+router.delete("/:noteId", (req, res) => {
+  noteId = req.params.noteId;
+  notes.findByIdAndRemove(noteId).then((note) => {
+    res.redirect(`/notes`);
   })
   .catch((error) => {
     console.log(error);
