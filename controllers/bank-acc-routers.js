@@ -108,6 +108,7 @@ router.put("/bankAcc/:id", (req, res) => {
 router.get("/bankAcc/:id", (req, res) => {
   const id = req.params.id;
   let date
+  let notesArray = []
 
   bankAcc.findById(id)
   .then((transaction) => {
@@ -115,11 +116,17 @@ router.get("/bankAcc/:id", (req, res) => {
     bankAcc
     .find({ transDate: date })
     .then((transactions) => {
-        // console.log(transaction.notes)
-      res.render("bankacc/show", { 
-        transactions : transactions, 
-        notes : transaction.notes 
-      });
+      for (let i = 0; i < transactions.length; i++) {
+        if (transactions[i].notes.length === 1) {
+          notesArray.push(transactions[i].notes[0])
+        } else {
+          for (let j = 0; j < transactions[i].notes.length; j++) {
+            notesArray.push(transactions[i].notes[j])
+          }
+        }
+      }
+        // res.json(notesArray)
+      res.render("bankacc/show", { transactions, notesArray });
     })
     .catch((error) => {
       console.log(error);

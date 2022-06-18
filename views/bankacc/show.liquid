@@ -65,15 +65,11 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
 
-          {% for note in notes %}
-          {% for transaction in transactions %}
-          <li>
-            <a class="dropdown-item" href="">{{note.note}}</a>
-
+          {% for note in notesArray %}
+          <li class="dropdown-item">
+            <!-- <a class="dropdown-item" href="">{{note.note}}</a> -->
+            {{note.note}}
           </li>
-
-
-          {% endfor %}
           {% endfor %}
         </ul>
       </div>
