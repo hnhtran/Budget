@@ -7,6 +7,7 @@ const noteSchema = new Schema(
   {
     noteDate: Date,
     note: String,
+    bankId: String,
     user: {
       type: String,
       ref: "user",

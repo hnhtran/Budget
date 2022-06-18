@@ -3,7 +3,7 @@
 
 <div class="container">
     <h2 class="page-header">Edit Note</h2>
-    <a href="/bankacc">Back to Bank Account</button></a>
+    <a href="/notes">Back to Notes</button></a>
     <h3>Under is the info of transaction made and note</h3>
 
     <div class="card text-center" id="cardNote" style="width: 18rem;">
@@ -13,12 +13,12 @@
                 Date : {{transaction.transDate | date: "%a %d %b %y"}} <br>
                 Note was made on {{note.noteDate | date: "%a %d %b %y"}}
             </p>
-            <form action="/notes/{{ note._id }}/{{transaction._id}}?_method=DELETE" method="POST">
+            <form action="/notes/{{ note._id }}/{{note.bankId}}?_method=DELETE" method="POST">
                 <input type="submit" class="btn btn-danger" value="Delete" />
             </form>
         </div>
     </div>
-    <form action="/notes/{{note._id}}/{{transaction._id}}?_method=PUT" method="post">
+    <form action="/notes/{{note._id}}/{{note.bankId}}?_method=PUT" method="post">
         <div class="mb-3">
             <label for="transName">Note</label>
             <input value="{{note.note}}" type="text" class="form-control" id="note" name="note"

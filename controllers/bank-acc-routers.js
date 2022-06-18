@@ -1,6 +1,8 @@
 // import dependencies
 const express = require("express");
 const bankAcc = require("../models/bankacc");
+const note = require("../models/note");
+const notes = require("../models/note");
 const router = express.Router();
 
 // index route
@@ -136,10 +138,16 @@ router.delete("/bankAcc/:id", (req, res) => {
   const id = req.params.id;
   // delete the fruit
   bankAcc
-    .findByIdAndRemove(id)
-    .then((transaction) => {
+    .findById(id)
+    .then((result) => {
+      notes.deleteMany({bankId : id})
+      .then(() => {
+        bankAcc.findByIdAndRemove(id)
+        .then(() => {
       // redirect to main page after deleting
         res.redirect("/bankacc")
+        })
+      })
     })
     // send error as json
     .catch((error) => {
