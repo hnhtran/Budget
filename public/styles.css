@@ -57,3 +57,10 @@ h3 {
 #cardNote {
     margin: 0 auto;
 }
+
+#footer {
+    position:absolute;
+    padding: 0;
+    bottom:0;
+    width:100%;
+ }

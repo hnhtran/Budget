@@ -1,7 +1,6 @@
-{% layout 'layout.liquid' %}
-{% block content %}
+{% layout 'layout.liquid' %} {% block content %}
 
-<div class="container">
+<div class="container-md position-relative">
   <h2 class="page-header">Personalised Transactions Notes</h2>
   <a href="/bankacc"><button type="button" class="btn btn-primary btn-md">Bank Account</button></a>
   <a href="/user/logout"><button type="button" class="btn btn-danger btn-md">Log out</button></a>
@@ -24,6 +23,7 @@
       </tr>
       {% endfor %}
     </tbody>
+  </table>
 </div>
 
 {% endblock %}
