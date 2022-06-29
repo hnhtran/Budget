@@ -45,6 +45,11 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+// about page
+app.get('/about', (req, res) => {
+    res.render('about');
+})
+
 //=========================================
 // Server listener
 //=========================================
